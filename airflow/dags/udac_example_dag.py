@@ -12,8 +12,8 @@ from helpers import SqlQueries
 default_args = {
     'owner': 'udacity',
     'depends_on_past': False,
-    'retries': 3,
-    'retry_delay': timedelta(minutes=5),
+    #'retries': 3,
+    #'retry_delay': timedelta(minutes=5),
     'start_date': datetime(2019, 1, 12),
     'email_on_retry': False
 }
@@ -51,7 +51,10 @@ stage_songs_to_redshift = StageToRedshiftOperator(
 
 load_songplays_table = LoadFactOperator(
     task_id='Load_songplays_fact_table',
-    dag=dag
+    dag=dag,
+    table='songplays',
+    redshift_conn_id="redshift",
+    load_sql_stmt=SqlQueries.songplay_table_insert
 )
 
 load_user_dimension_table = LoadDimensionOperator(

@@ -1,37 +1,3 @@
-CREATE TABLE IF NOT EXISTS public.staging_events(
-	artist VARCHAR,
-	auth VARCHAR,
-	firstName VARCHAR,
-	gender VARCHAR,
-	itemInSession INT,
-	lastName VARCHAR,
-	length DECIMAL,
-	level VARCHAR,
-	location VARCHAR,
-	method VARCHAR,
-	page VARCHAR,
-	registration VARCHAR,
-	sessionId INT,
-	song VARCHAR,
-	status VARCHAR,
-	ts BIGINT,
-	userAgent VARCHAR,
-	userId INT
-);
-
-CREATE TABLE IF NOT EXISTS public.staging_songs(
-	num_songs INT,
-	artist_id VARCHAR,
-	artist_latitude DECIMAL,
-	artist_longitude DECIMAL,
-	artist_location VARCHAR,
-	artist_name VARCHAR,
-	song_id VARCHAR,
-	title VARCHAR,
-	duration DECIMAL,
-	YEAR INT
-);
-
 CREATE TABLE public.artists (
 	artistid varchar(256) NOT NULL,
 	name varchar(256),
