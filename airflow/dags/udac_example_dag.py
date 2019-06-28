@@ -6,14 +6,11 @@ from airflow.operators import (StageToRedshiftOperator, LoadFactOperator,
                                 LoadDimensionOperator, DataQualityOperator)
 from helpers import SqlQueries
 
-# AWS_KEY = os.environ.get('AWS_KEY')
-# AWS_SECRET = os.environ.get('AWS_SECRET')
-
 default_args = {
     'owner': 'udacity',
     'depends_on_past': False,
-    #'retries': 3,
-    #'retry_delay': timedelta(minutes=5),
+    'retries': 3,
+    'retry_delay': timedelta(minutes=5),
     'start_date': datetime(2019, 1, 12),
     'email_on_retry': False
 }
@@ -94,7 +91,7 @@ load_time_dimension_table = LoadDimensionOperator(
 run_quality_checks = DataQualityOperator(
     task_id='Run_data_quality_checks',
     dag=dag,
-    table='songplays',
+    tables=['songplays', 'users', 'songs', 'artists', 'time'],
     redshift_conn_id="redshift"
 )
 
