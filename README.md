@@ -10,10 +10,10 @@ Credits: [Shawn's Pitstop](https://xunnanxu.github.io/2018/04/13/Workflow-Proces
 
 ### Prerequisites
 
-```
-Apache Airflow 1.10.2
-Python 3.6.3
-```
+
+Tables must be created in Redshift before executing the DAG workflow. The create tables statements can be found in:
+
+`create_tables.sql`
 
 ## Data Sources
 
@@ -25,15 +25,16 @@ Data resides in two directories that contain files in JSON format:
 
 ## Data Quality Checks
 
-```
-Give an example
-```
+In order to ensure the tables were properly loaded, a data quality checking is performed to count the total records each table has. If a table has no rows then the workflow will fail and throw an error message.
 
 ## Scripts Usage
 
-```
-Give an example
-```
+* `create_tables.sql` - Contains the DDL for all tables used in this projecs
+* `udac_example_dag.py` - The DAG configuration file to run in Airflow
+* `stage_redshift.py` - Operator to read files from S3 and load into Redshift staging tables
+* `load_fact.py` - Operator to load the fact table in Redshift
+* `load_dimension.py` - Operator to read from staging tables and load the dimension tables in Redshift
+* `data_quality.py` - Operator for data quality checking
 
 ## Built With
 
